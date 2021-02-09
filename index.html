@@ -9,23 +9,41 @@
 <body>
     <header>
         <nav>
-            <form>
-                <input type="search" id="search" class="search" placeholder="search city">
+            <form id="search-form">
+                <input type="search" id="search" class="search" data-search="none" placeholder="search city">
                 <input type="submit" value="+" class="btn">
             </form>
         </nav>
     </header>
+    <ul class="search-result hide" id="search-result"></ul>
     <div class="container">
         <div class="previous">
             <button class="btn"><</button>
         </div>
-        <div class="weather">
-            <h4>Paris 14</h4>
-            <h1>23°</h1>
+        <div class="weather-container">
+            <div class="section-1">
+                <div class="city-container">
+                    <h2 class="city">Paris 14</h2>
+                    <p>mise à jour à <span id="maj">10h05</span></p>
+                </div>
+                <div class="weather">
+                    <h1>-1°</h1>
+                    <p><span id="weather-text">Nuageux</span> <span id="weather-min">2</span> / <span id="weather-max">8°C</span></p>
+                    <h3>
+                        <span id="day-letter">Mercredi</span>
+                        <span id="day">09</span>
+                        <span id="month-letter">février</span>
+                    </h3>
+                </div>
+            </div>
+            <div class="section-2">
+                graph
+            </div>
         </div>
         <div class="next">
             <button class="btn">></button>
         </div>
     </div>
+    <script src="assets/js/search.js"></script>
 </body>
 </html>
