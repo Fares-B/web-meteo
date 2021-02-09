@@ -3,6 +3,12 @@ let searchForm = document.getElementById('search-form');
 let searchResultDiv = document.getElementById('search-result');
 const urlApiAddress = "https://api-adresse.data.gouv.fr/search/?q=";
 
+if (!geo) {
+    var geo = {
+        lat: 1,
+        lon: 1,
+    }
+}
 
 searchInput.addEventListener('input', () => {
     const search = searchInput.value;
@@ -16,13 +22,13 @@ searchInput.addEventListener('input', () => {
             searchResultDiv.innerHTML = "";
             result.features.forEach(el => {
                 let aEl = document.createElement('a');
-                aEl.dataset.city = el.properties.postcode;
+                addGeo(aEl, el.geometry.coordinates);
                 aEl.textContent = el.properties.label;
                 aEl.href = "#";
                 aEl.addEventListener('click', searchAClick);
                 searchResultDiv.append(aEl);
             });
-            searchInput.dataset.search = result.features[0].properties.postcode;
+            addGeo(searchInput, result.features[0].geometry.coordinates);
         });
         
     }
@@ -30,20 +36,26 @@ searchInput.addEventListener('input', () => {
 
 searchForm.addEventListener('submit', (e) => {
     e.preventDefault()
-    if (searchInput.dataset.search !== "none") {
-        const save = searchInput.dataset.search;
+    if (searchInput.dataset.lon !== "none") {
+        geo.lon = searchInput.dataset.lon;
+        geo.lat = searchInput.dataset.lat;
+        console.log(geo);
         hideSearchInput();
-        console.log(save);
     }
 })
 
 function hideSearchInput() {
     searchResultDiv.classList.add("hide");
-    searchInput.dataset.search = "none";
+    searchInput.dataset.lon = searchInput.dataset.lat = "none";
 }
 
 function searchAClick(e) {
     e.preventDefault()
     searchInput.value = e.target.textContent;
-    searchInput.dataset.search = e.target.dataset.city;
+    searchInput.dataset = e.target.dataset;
+}
+
+function addGeo(el, geoArr) {
+    el.dataset.lon = geoArr[0];
+    el.dataset.lat = geoArr[1];
 }
