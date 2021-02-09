@@ -10,7 +10,7 @@
     <header>
         <nav>
             <form id="search-form">
-                <input type="search" id="search" class="search" data-search="none" placeholder="search city">
+                <input type="search" id="search" class="search" data-lon="none" data-lat="none" placeholder="search city">
                 <input type="submit" value="+" class="btn">
             </form>
         </nav>
@@ -27,8 +27,9 @@
                     <p>mise à jour à <span id="maj">10h05</span></p>
                 </div>
                 <div class="weather">
+                    <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="icon">
                     <h1>-1°</h1>
-                    <p><span id="weather-text">Nuageux</span> <span id="weather-min">2</span> / <span id="weather-max">8°C</span></p>
+                    <p><span id="weather-text">Nuageux</span> <span id="weather-min">2</span> / <span id="weather-max">8C</span>°</p>
                     <h3>
                         <span id="day-letter">Mercredi</span>
                         <span id="day">09</span>
@@ -45,5 +46,6 @@
         </div>
     </div>
     <script src="assets/js/search.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
