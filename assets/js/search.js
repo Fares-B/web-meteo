@@ -3,12 +3,12 @@ let searchForm = document.getElementById('search-form');
 let searchResultDiv = document.getElementById('search-result');
 const urlApiAddress = "https://api-adresse.data.gouv.fr/search/?q=";
 
-if (!geo) {
-    var geo = {
-        lat: 1,
-        lon: 1,
-    }
-}
+// if (!geo) {
+//     var geo = {
+//         lat: 1,
+//         lon: 1,
+//     }
+// }
 
 searchInput.addEventListener('input', () => {
     const search = searchInput.value;
@@ -34,15 +34,26 @@ searchInput.addEventListener('input', () => {
     }
 });
 
-searchForm.addEventListener('submit', (e) => {
+searchForm.addEventListener('submit', searchSubmit);
+
+function searchSubmit(e) {
     e.preventDefault()
+    // searchForm.removeEventListener('submit', searchSubmit);
     if (searchInput.dataset.lon !== "none") {
-        geo.lon = searchInput.dataset.lon;
-        geo.lat = searchInput.dataset.lat;
-        console.log(geo);
+        /*
+            { 
+                id: {lat: 48, lon: 3 },
+                id2: {lat: 48, lon: 3 },
+            }
+        */
+        let cities = JSON.parse(localStorage.getItem("cities")) || {};
+        cities[ID()] = { lat: searchInput.dataset.lat, lon: searchInput.dataset.lon };
+        localStorage.setItem("cities", JSON.stringify(cities));
+        console.log(cities);
+        loadWeather();
         hideSearchInput();
     }
-})
+}
 
 function hideSearchInput() {
     searchResultDiv.classList.add("hide");
@@ -59,3 +70,11 @@ function addGeo(el, geoArr) {
     el.dataset.lon = geoArr[0];
     el.dataset.lat = geoArr[1];
 }
+
+let ID = function () {
+    // https://gist.github.com/gordonbrander/2230317
+    // Math.random should be unique because of its seeding algorithm.
+    // Convert it to base 36 (numbers + letters), and grab the first 9 characters
+    // after the decimal.
+    return '_' + Math.random().toString(36).substr(2, 9);
+};

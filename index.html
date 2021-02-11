@@ -18,13 +18,18 @@
     <ul class="search-result hide" id="search-result"></ul>
     <div class="container">
         <div class="previous">
-            <button class="btn"><</button>
+            <button class="btn" id="previous"><</button>
         </div>
-        <div class="weather-container">
+        <div class="weather-container" data-id="none">
             <div class="section-1">
-                <div class="city-container">
-                    <h2 class="city">Paris 14</h2>
-                    <p>mise à jour à <span id="maj">10h05</span></p>
+                <div class="bloc">
+                    <div class="city-container">
+                        <h2 class="city" id="city">Paris 14</h2>
+                        <p>mise à jour à <span id="maj">10h05</span></p>
+                    </div>
+                    <div class="drop">
+                        <button href="#drop" class="btn" id="drop">drop</button>
+                    </div>
                 </div>
                 <div class="weather">
                     <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="icon">
@@ -35,6 +40,7 @@
                         <span id="day">09</span>
                         <span id="month-letter">février</span>
                     </h3>
+                    <p>lever/coucher de soleil : <span id="sunrise">4h00</span> / <span id="sunset">18h00</span></p>
                 </div>
             </div>
             <div class="section-2">
@@ -42,7 +48,7 @@
             </div>
         </div>
         <div class="next">
-            <button class="btn">></button>
+            <button class="btn" id="next">></button>
         </div>
     </div>
     <script src="assets/js/search.js"></script>
