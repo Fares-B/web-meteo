@@ -15,6 +15,11 @@ h1 {
     font-family: 'Sansita Swashed', cursive;
 }
 
+
+img {
+    pointer-events: none;
+}
+
 .btn {
     color: #fff;
     background-color: #337ab7;

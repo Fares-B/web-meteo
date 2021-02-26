@@ -50,7 +50,8 @@ function searchSubmit(e) {
         cities[ID()] = { lat: searchInput.dataset.lat, lon: searchInput.dataset.lon };
         localStorage.setItem("cities", JSON.stringify(cities));
         console.log(cities);
-        loadWeather();
+        // loadWeather();
+        window.location.reload();
         hideSearchInput();
     }
 }
@@ -62,8 +63,11 @@ function hideSearchInput() {
 
 function searchAClick(e) {
     e.preventDefault()
+    console.log(e.target.dataset);
     searchInput.value = e.target.textContent;
-    searchInput.dataset = e.target.dataset;
+    // searchInput.dataset = e.target.dataset;
+    searchInput.dataset.lon = e.target.dataset.lon;
+    searchInput.dataset.lat = e.target.dataset.lat;
 }
 
 function addGeo(el, geoArr) {
