@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="manifest" href="manifest.json">
+    <title>Web Météo</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <form id="search-form">
+                <input type="search" id="search" class="search" data-lon="none" data-lat="none" placeholder="search city">
+                <input type="submit" value="+" class="btn">
+            </form>
+        </nav>
+    </header>
+    <ul class="search-result hide" id="search-result"></ul>
+    <div class="container">
+        <div class="previous">
+            <button class="btn" id="previous"><</button>
+        </div>
+        <div class="weather-container" data-id="none">
+            <div class="section-1">
+                <div class="bloc">
+                    <div class="city-container">
+                        <h2 class="city" id="city">Paris 14</h2>
+                        <p>mise à jour à <span id="maj">10h05</span></p>
+                    </div>
+                    <div class="drop">
+                        <button href="#drop" class="btn" id="drop">drop</button>
+                    </div>
+                </div>
+                <div class="weather">
+                    <img src="http://openweathermap.org/img/wn/01d@2x.png" alt="icon">
+                    <h1>-1°</h1>
+                    <p><span id="weather-text">Nuageux</span> <span id="weather-min">2</span> / <span id="weather-max">8C</span>°</p>
+                    <h3>
+                        <span id="day-letter">Mercredi</span>
+                        <span id="day">09</span>
+                        <span id="month-letter">février</span>
+                    </h3>
+                    <p>lever/coucher de soleil : <span id="sunrise">4h00</span> / <span id="sunset">18h00</span></p>
+                </div>
+            </div>
+            <div class="section-2">
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                <!-- <canvas id="myChart" width="400" height="200"></canvas> -->
+            </div>
+        </div>
+        <div class="next">
+            <button class="btn" id="next">></button>
+        </div>
+    </div>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script> -->
+        <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+        }
+    </script>
+</body>
+</html>
