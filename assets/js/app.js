@@ -6,6 +6,8 @@ let previousButton = document.getElementById('previous');
 let dropButton = document.getElementById('drop');
 let index = 0;
 let images = [];
+let cities = JSON.stringify(localStorage.getItem('cities')) || [];
+
 const colorTransparent = 'rgba(0,0,0,0)';
 
 if (Object.keys(getCities()).lexngth === 0) {
@@ -33,6 +35,7 @@ function errorGeo(params) {
 function addGeoToStorage(coords) {
     let city = {}
     city[ID()] = { lat: coords.lat, lon: coords.lon };
+    // city[ID()] = coords;
     localStorage.setItem("cities", JSON.stringify(city));
 }
 
@@ -57,7 +60,7 @@ function loadWeather(i=0) {
     .then(result => {
         document.querySelector('h1').textContent = result.current.temp + "°";
         document.getElementById('weather-text').textContent = result.current.weather[0].description;
-        document.querySelector('img').setAttribute('src', `http://openweathermap.org/img/wn/${result.current.weather[0].icon}@2x.png`);
+        document.querySelector('img').setAttribute('src', `https://openweathermap.org/img/wn/${result.current.weather[0].icon}@2x.png`);
         document.getElementById('weather-min').textContent = result.daily[0].temp.min;
         document.getElementById('weather-max').textContent = result.daily[0].temp.max;
         document.getElementById('day-letter').textContent = getTime({ weekday: 'long' });
@@ -128,13 +131,13 @@ function loadWeather(i=0) {
     
     function next() {
         i = (i + 1 >= len(cities)) ? 0 : i + 1;
-        removeEvent();
+        // removeEvent();
         loadWeather(i);
     }
 
     function previous() {
         i = (i - 1 < 0) ? len(cities) - 1 : i - 1;
-        removeEvent();
+        // removeEvent();
         loadWeather(i);
     }
 
@@ -244,7 +247,7 @@ function removeImages() {
 function addImages(chart) {
     for (var i = 0; i < chart.data[0].dataPoints.length; i++) {
         const icon = chart.data[0].dataPoints[i].icon;
-        images.push($("<img>").attr("src", `http://openweathermap.org/img/wn/${icon}@2x.png`));
+        images.push($("<img>").attr("src", `https://openweathermap.org/img/wn/${icon}@2x.png`));
         images[i].attr("class", icon).appendTo($("#chartContainer>.canvasjs-chart-container"));
         positionImage(images[i], i);
     }
